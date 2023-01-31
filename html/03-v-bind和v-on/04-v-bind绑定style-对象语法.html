@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <!-- 用-连接 -->
+        <div :style="{color:finalColor,'font-size':'30px'}">哈哈哈</div>
+        <!-- 驼峰式 -->
+        <div :style="{color:finalColor,'fontSize':'30px'}">哈哈哈</div>
+        <!-- 字符串拼接 -->
+        <div :style="{color:finalColor,'font-size':finalFontSize+'px'}">哈哈哈</div>
+        <!-- 对象 -->
+        <div :style="finalStyleObj">哈哈哈</div>
+        <!-- 调用方法 -->
+        <div :style="getFinalStyleObj()">哈哈哈</div>
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    message: "hello word",
+                    finalColor: 'red',
+                    finalFontSize: 50,
+                    finalStyleObj: {
+                        fontSize: '50px',
+                        fontWeight: 700,
+                        backgroundColor: 'red'
+                    }
+                }
+            },
+            methods: {
+                getFinalStyleObj() {
+                    return {
+                        fontSize: '50px',
+                        fontWeight: 700,
+                        backgroundColor: 'red'
+                    }
+                }
+            }
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+</body>
+
+</html>
