@@ -108,3 +108,79 @@
     </template>
 ```
 
+
+
+
+
+### 6. v-bind的绑定属性
+
+基本使用：
+
+```vue
+<body>
+
+    <div id="app"></div>
+
+    <!-- 在vue2中，template模板中只能有一个根元素 -->
+    <!-- vue3中允许有多个根元素 -->
+    <template id="my-app">
+        <!-- 使用v-bind进行动态绑定 -->
+        <img v-bind:src="imageUrl" alt="" srcset="">
+        <!-- v-bind 提供的一个语法糖，直接用冒号代替一大串 -->
+        <a :href="link">百度一下</a>
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    imageUrl: " https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png",
+                    link: 'https://www.baidu.com'
+                }
+            },
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+```
+
+
+
+### 7. v-bind绑定class-对象语法
+
+```vue
+<template id="my-app">
+        <div :class="classNmae">哈哈哈</div>
+        <!-- 对象语法：{active,boolen} -->
+        <!-- 当后面的值为true时，前面的类会被绑定；否则不会被绑定 -->
+        <div :class="{active:flag}">呵呵呵</div>
+        <button @click="toggle">切换</button>
+
+        <!-- 也可以有多个键值对 -->
+        <div :class="{active:flag,title:true}">呵呵呵</div>
+
+        <!-- 默认的class和动态的class结合-->
+        <div class="aaa bbb" :class="{active:flag,title:true}">呵呵呵</div>
+
+        <!-- 也可以将对象放到一个单独的属性中 -->
+        <div class="aaa bbb" :class="classObj">呵呵呵</div>
+
+
+    </template>
+```
+
+
+
+
+
+### 8. v-bind绑定class-数组语法
+
+​	
