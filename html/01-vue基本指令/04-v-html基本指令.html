@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <!-- 下面这样 只会把message中的东西展示出来 -->
+        <div>{{message}}</div>
+        <!-- 下面这样 会把html页面解析出来 -->
+        <div v-html='message'></div>
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    message: '<span><div style="color: royalblue;background: #999;">哈哈哈</div></span>'
+                }
+            },
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <!-- mustache基本使用 -->
+        <h2>{{message}}-{{message}}</h2>
+        <!-- 是一个表达式 -->
+        <h2>{{num*10}}</h2>
+        <h2>{{message.split("").reverse().join(" ")}}</h2>
+        <!-- 也可以调用函数 -->
+        <h2>{{getReverse()}}</h2>
+        <!-- 也可以使用三元运算符 -->
+        <h2>{{flag===true? "是":"不是"}}</h2>
+        <button @click="change">切换</button>
+
+
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    message: "hello word",
+                    num: 100,
+                    flag: false
+                }
+            },
+            methods: {
+                getReverse() {
+                    return this.message.split(" ").reverse().join("");
+                },
+                change() {
+                    return this.flag = !this.flag;
+                }
+            }
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+
+</html>
