@@ -110,7 +110,7 @@
 
 
 
-
+## 一 、v-bind的使用
 
 ### 6. v-bind的绑定属性
 
@@ -340,3 +340,133 @@
 ```
 
 ### 12. v-bind属性直接绑定一个对象
+
+```vue
+    <template id="my-app">
+        <!-- 将info的全部属性给div -->
+        <div v-bind="info">哈哈哈</div>
+    </template>
+```
+
+
+
+## 二、 v-on的使用
+
+### 1. v-on的基本使用
+
+```js
+    <template id="my-app">
+        <button @click="btn1Click">btn1</button>
+        <!-- 完整写法如下所示 -->
+        <button v-on:click="btn2Click">btn2</button>
+        <div v-on:mousemove="mouseMove">哈哈哈</div>
+        <!-- 绑定一个表达式 -->
+        <button @click="num++">{{num}}</button>
+        <!-- 绑定一个对象 -->
+        <div class="area" v-on="{click:btn1Click,mousemove:mouseMove}"></div>
+    </template>
+```
+
+
+
+### 2. v-on的参数传递
+
+```js
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <!-- 默认传入event对象,可以在方法中获取 -->
+        <!-- 如果不需要额外的参数,方法后面的()可以不加 -->
+        <button @click="btn1Click">btn1</button>
+        <!-- $event可以获取到事件发生的事件对象 -->
+        <button @click="btn2Click($event,'lpz',18)">btn2</button>
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    message: "hello word"
+                }
+            },
+            methods: {
+                btn1Click(event) {
+                    console.log(event);
+                },
+                btn2Click(event, name, age) {
+                    console.log(event, name, age);
+                }
+            }
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+```
+
+
+
+### 3. v-on的修饰符
+
+```vue
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <!-- 会有冒泡 -->
+        <div @click="divClick">
+            <button @click="btnClick">btn1</button>
+        </div>
+        <p></p>
+        <!-- 去除冒泡 -->
+        <div @click="divClick">
+            <button @click.stop="btnClick">btn1</button>
+        </div>
+
+        <!-- {.keyAlise}仅当事件是从特定键触发时才触发回调 -->
+        <input type="text" @keyup.enter="enterKeyUp">
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    message: "hello word"
+                }
+            },
+            methods: {
+                btnClick() {
+                    console.log('btn clicked');
+                },
+                divClick() {
+                    console.log('div clicked');
+                },
+                // 获取输入的数据,按下回车显示
+                enterKeyUp(event) {
+                    console.log('enter up', event.target.value);
+                }
+            }
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+```
+
