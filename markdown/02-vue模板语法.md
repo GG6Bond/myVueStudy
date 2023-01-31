@@ -470,3 +470,165 @@
 </body>
 ```
 
+
+
+## 三、条件渲染
+
+### 1. 条件渲染的基本使用
+
+```vue
+    <template id="my-app">
+        <!-- 当isShow为 true时,vue就会将h2渲染出来,否则不会 -->
+        <h2 v-if="isShow">哈哈哈</h2>
+        <button @click="toggle">切换</button>
+    </template>
+```
+
+### 2. 多个条件的渲染
+
+```vue
+    <template id="my-app">
+        <input type="text" v-model="score">
+        <h2 v-if="score>90">优秀</h2>
+        <h2 v-else-if="score>60">良好</h2>
+        <h2 v-else>不及格</h2>
+    </template>
+```
+
+
+
+### 3. template和v-if结合使用
+
+```vue
+    <template id="my-app">
+        <!-- 想要实现: 三行 一起显示 -->
+        <!-- 下面这种做法会多渲染一个div,没有必要 -->
+        <!-- <div v-if="isShow">
+            <h2>哈哈哈</h2>
+            <h2>哈哈哈</h2>
+            <h2>哈哈哈</h2>
+        </div>
+
+        <div v-else>
+            <h2>吼吼吼</h2>
+            <h2>吼吼吼</h2>
+            <h2>吼吼吼</h2>
+        </div> -->
+
+        <!-- 可以尝试用下面的方法 -->
+        <!-- 因为template在vue中是不会存在的 -->
+        <template v-if="isShow">
+            <h2>哈哈哈</h2>
+            <h2>哈哈哈</h2>
+            <h2>哈哈哈</h2>
+        </template>
+
+        <template v-else>
+            <h2>吼吼吼</h2>
+            <h2>吼吼吼</h2>
+            <h2>吼吼吼</h2>
+        </template>
+
+    </template>
+```
+
+
+
+### 4. v-show的条件渲染
+
+```vue
+    <template id="my-app">
+        <!-- 两者都为true时，没有区别 -->
+        <!-- v-show不支持template 不可以和v-else一起使用 -->
+        <!-- 开发中，若元素需要 在显示和隐藏之间频繁切换，那么使用v-show -->
+        <h2 v-if="isShow">hhh</h2>
+        <h2 v-show="isShow">kkk</h2>
+    </template>
+```
+
+
+
+## 四、 列表渲染
+
+
+
+### 1. v-for的基本使用
+
+```vue
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <ul>
+            <!-- 第一个参数是内容，第二个参数是索引值 -->
+            <li v-for="(movie,index) in movies">{{index+1}} .{{movie}}</li>
+        </ul>
+        <p2>个人信息</p2>
+        <ul>
+            <!-- 默认得到的是value -->
+            <!-- <li v-for="value in info">{{value}}</li> -->
+            <!-- 第一个参数是 value,第二个是key -->
+            <!-- <li v-for="(value,key) in info">{{value}}---{{key}}</li> -->
+            <!-- 第三个参数是索引 -->
+            <li v-for="(value,key,index) in info">{{value}}---{{key}}---{{index}}</li>
+        </ul>
+
+        <p2>遍历数字</p2>
+        <ul>
+            <!-- <li v-for="num in 10">{{num}}</li> -->
+            <!-- 索引值 -->
+            <li v-for="(num,index) in 10">{{num}}---{{index}}</li>
+        </ul>
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    movies: [
+                        "111",
+                        '222',
+                        '333',
+                        '444',
+                        '555']
+                    ,
+                    info: {
+                        name: 'lpz',
+                        age: 18,
+                        height: 180
+                    }
+
+
+                }
+            },
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+```
+
+
+
+### 2. v-for和template
+
+```vue
+    <template id="my-app">
+        <ul>
+            <template v-for="(value,key) in info">
+                <li>{{value}}</li>
+                <li>{{key}}</li>
+                <li class="divider"></li>
+            </template>
+        </ul>
+    </template>
+```
+
