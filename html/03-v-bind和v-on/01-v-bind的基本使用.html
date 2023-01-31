@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app"></div>
+
+    <!-- 在vue2中，template模板中只能有一个根元素 -->
+    <!-- vue3中允许有多个根元素 -->
+    <template id="my-app">
+        <!-- 使用v-bind进行动态绑定 -->
+        <img v-bind:src="imageUrl" alt="" srcset="">
+        <!-- v-bind 提供的一个语法糖，直接用冒号代替一大串 -->
+        <a :href="link">百度一下</a>
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    imageUrl: " https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png",
+                    link: 'https://www.baidu.com'
+                }
+            },
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+
+</html>
