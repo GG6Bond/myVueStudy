@@ -183,4 +183,160 @@
 
 ### 8. v-bind绑定class-数组语法
 
-​	
+```vue
+    <template id="my-app">
+        <!-- 数组语法 -->
+        <div :class="['abc',title]">哈哈哈</div>
+        <!-- 支持三元运算符 -->
+        <div :class="['abc',title,isActive?'active':'']">哈哈哈</div>
+        <!-- 允许嵌套对象语法 -->
+        <div :class="['abc',title,{active:isActive}]">哈哈哈</div>
+    </template>
+```
+
+
+
+### 9. v-bind绑定style-对象语法
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <!-- 用-连接 -->
+        <div :style="{color:finalColor,'font-size':'30px'}">哈哈哈</div>
+        <!-- 驼峰式 -->
+        <div :style="{color:finalColor,'fontSize':'30px'}">哈哈哈</div>
+        <!-- 字符串拼接 -->
+        <div :style="{color:finalColor,'font-size':finalFontSize+'px'}">哈哈哈</div>
+        <!-- 对象 -->
+        <div :style="finalStyleObj">哈哈哈</div>
+        <!-- 调用方法 -->
+        <div :style="getFinalStyleObj()">哈哈哈</div>
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    message: "hello word",
+                    finalColor: 'red',
+                    finalFontSize: 50,
+                    finalStyleObj: {
+                        fontSize: '50px',
+                        fontWeight: 700,
+                        backgroundColor: 'red'
+                    }
+                }
+            },
+            methods: {
+                getFinalStyleObj() {
+                    return {
+                        fontSize: '50px',
+                        fontWeight: 700,
+                        backgroundColor: 'red'
+                    }
+                }
+            }
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+</body>
+
+</html>
+```
+
+
+
+
+
+### 10. v-bind绑定style-数组语法
+
+```vue
+    <template id="my-app">
+        <!-- 将两个对象的属性合并 -->
+        <div :style="[style1Obj,style2Obj]">哈哈哈</div>
+    </template>
+```
+
+
+
+```vue
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    style1Obj: {
+                        color: 'red',
+                        fontSize: '50px'
+                    },
+                    style2Obj: {
+                        textDecoration: "underline"
+                    }
+                }
+            },
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+```
+
+
+
+### 11. v-bind动态绑定属性名称
+
+```vue
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <div :[name]="value">哈哈哈</div>
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    name: "aaa",
+                    value: 'kkk'
+                }
+            },
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+
+```
+
+### 12. v-bind属性直接绑定一个对象
