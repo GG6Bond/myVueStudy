@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <ul>
+            <!-- 第一个参数是内容，第二个参数是索引值 -->
+            <li v-for="(movie,index) in movies">{{index+1}} .{{movie}}</li>
+        </ul>
+        <p2>个人信息</p2>
+        <ul>
+            <!-- 默认得到的是value -->
+            <!-- <li v-for="value in info">{{value}}</li> -->
+            <!-- 第一个参数是 value,第二个是key -->
+            <!-- <li v-for="(value,key) in info">{{value}}---{{key}}</li> -->
+            <!-- 第三个参数是索引 -->
+            <li v-for="(value,key,index) in info">{{value}}---{{key}}---{{index}}</li>
+        </ul>
+
+        <p2>遍历数字</p2>
+        <ul>
+            <!-- <li v-for="num in 10">{{num}}</li> -->
+            <!-- 索引值 -->
+            <li v-for="(num,index) in 10">{{num}}---{{index}}</li>
+        </ul>
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    movies: [
+                        "111",
+                        '222',
+                        '333',
+                        '444',
+                        '555']
+                    ,
+                    info: {
+                        name: 'lpz',
+                        age: 18,
+                        height: 180
+                    }
+
+
+                }
+            },
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+
+</html>

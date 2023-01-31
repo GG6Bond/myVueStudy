@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <!-- 两者都为true时，没有区别 -->
+        <!-- v-show不支持template 不可以和v-else一起使用 -->
+        <!-- 开发中，若元素需要 在显示和隐藏之间频繁切换，那么使用v-show -->
+        <h2 v-if="isShow">hhh</h2>
+        <h2 v-show="isShow">kkk</h2>
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    isShow: false
+                }
+            },
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+
+</html>

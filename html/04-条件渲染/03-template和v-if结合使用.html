@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <!-- 想要实现: 三行 一起显示 -->
+        <!-- 下面这种做法会多渲染一个div,没有必要 -->
+        <!-- <div v-if="isShow">
+            <h2>哈哈哈</h2>
+            <h2>哈哈哈</h2>
+            <h2>哈哈哈</h2>
+        </div>
+
+        <div v-else>
+            <h2>吼吼吼</h2>
+            <h2>吼吼吼</h2>
+            <h2>吼吼吼</h2>
+        </div> -->
+
+        <!-- 可以尝试用下面的方法 -->
+        <!-- 因为template在vue中是不会存在的 -->
+        <template v-if="isShow">
+            <h2>哈哈哈</h2>
+            <h2>哈哈哈</h2>
+            <h2>哈哈哈</h2>
+        </template>
+
+        <template v-else>
+            <h2>吼吼吼</h2>
+            <h2>吼吼吼</h2>
+            <h2>吼吼吼</h2>
+        </template>
+
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    isShow: true
+                }
+            },
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+
+</html>
