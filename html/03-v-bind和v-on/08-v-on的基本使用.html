@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .area {
+            height: 200px;
+            width: 200px;
+            background-color: #999;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <button @click="btn1Click">btn1</button>
+        <!-- 完整写法如下所示 -->
+        <button v-on:click="btn2Click">btn2</button>
+        <div v-on:mousemove="mouseMove">哈哈哈</div>
+        <!-- 绑定一个表达式 -->
+        <button @click="num++">{{num}}</button>
+        <!-- 绑定一个对象 -->
+        <div class="area" v-on="{click:btn1Click,mousemove:mouseMove}"></div>
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    num: 10,
+                }
+            },
+            methods: {
+                btn1Click() {
+                    console.log('btn1 clicked');
+                },
+                btn2Click() {
+                    console.log('btn2 clicked');
+                },
+                mouseMove() {
+                    console.log('mouse move')
+                }
+            }
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+
+</html>
