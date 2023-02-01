@@ -632,3 +632,103 @@
     </template>
 ```
 
+
+
+### 3. 数组的修改方法
+
+```vue
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <ul>
+            <li v-for="(num,index) in movies">{{num}}---{{index+1}}</li>
+        </ul>
+        <!-- v-modele 监听数组，数组内容发生改变 界面内容会自动刷新 -->
+        <input type="text" v-model="newMovie">
+        <br>
+        <button @click="addMovie">添加电影</button>
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    newMovie: "",
+                    movies: [
+                        "111",
+                        '222',
+                        '333',
+                        '444',
+                        '555']
+                }
+            },
+            methods: {
+                addMovie() {
+                    console.log(this.newMovie);
+                    this.movies.push(this.newMovie);
+                    this.newMovie = "";
+                }
+            }
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+```
+
+
+
+### 4. 案例-插入f元素
+
+```html
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <ul>
+            <!-- 数组发生变化，数组需要重新遍历，会全部重新渲染· -->
+            <!-- <li v-for="num in letter">{{num}}</li> -->
+            <!-- 有key。diff算法 性能较高 -->
+            <li v-for="num in letter" :key="item">{{num}}</li>
+        </ul>
+        <button @click="insertF">插入f</button>
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    letter: ['a', 'b', 'c', 'd'],
+                }
+            },
+            methods: {
+                insertF() {
+                    this.letter.splice(2, 0, 'f')
+                }
+            }
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+```
+
+
+
