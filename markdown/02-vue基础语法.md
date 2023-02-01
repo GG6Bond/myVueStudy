@@ -738,4 +738,121 @@
 
 
 
-### 1. 三个案例的实现-插值语法.html
+### 1. 三个案例的实现
+
+* 插值语法：
+
+  ```vue
+      <template id="my-app">
+          <!-- 冗长,不宜维护,效率低 -->
+          <h2>{{firstName+' '+lastName}}</h2>
+          <h2>{{score>60?'及格':'不及格'}}</h2>
+          <h2>{{message.split(' ').reverse().join(' ')}}</h2>
+      </template>
+  ```
+
+  
+
+* 方法调用：
+
+  ```vue
+  <body>
+  
+      <div id="app"></div>
+  
+      <template id="my-app">
+          <!-- 不够直观,效率低 -->
+          <h2>{{getFullName()}}</h2>
+          <h2>{{getResult()}}</h2>
+          <h2>{{getReverse()}}</h2>
+      </template>
+  
+      <script src="../../js/vue.js"></script>
+  
+      <script>
+  
+          const App = {
+              template: '#my-app',
+              data() {
+                  return {
+                      firstName: "Kobe",
+                      lastName: "Brant",
+                      score: 80,
+                      message: "hello world"
+                  }
+              },
+              methods: {
+                  getFullName() {
+                      return this.firstName + ' ' + this.lastName;
+                  },
+                  getResult() {
+                      return this.score > 60 ? '及格' : '不及格';
+                  },
+                  getReverse() {
+                      return this.message.split(' ').reverse().join(" ");
+                  }
+              }
+  
+          }
+  
+          Vue.createApp(App).mount('#app');
+  
+      </script>
+  
+  </body>
+  
+  ```
+
+  
+
+* 计算属性
+
+  ```vue
+  <body>
+  
+      <div id="app"></div>
+  
+      <template id="my-app">
+          <!-- 计算属性:直观,有缓存 -->
+          <h2>{{fullName}}</h2>
+          <h2>{{result}}</h2>
+          <h2>{{message}}</h2>
+      </template>
+  
+      <script src="../../js/vue.js"></script>
+  
+      <script>
+  
+          const App = {
+              template: '#my-app',
+              data() {
+                  return {
+                      firstName: "Kobe",
+                      lastName: "Brant",
+                      score: 80,
+                      message: "hello word"
+                  }
+              },
+              computed: {
+                  // 定义了一个计算属性fullName
+                  fullName() {
+                      return this.firstName + ' ' + this.lastName;
+                  },
+                  result() {
+                      return this.score > 60 ? '及格' : '不及格';
+                  },
+                  reverseMessage() {
+                      return this.message.split(' ').reverse().join(" ");
+                  }
+              }
+  
+          }
+  
+          Vue.createApp(App).mount('#app');
+  
+      </script>
+  
+  </body>
+  ```
+
+  
