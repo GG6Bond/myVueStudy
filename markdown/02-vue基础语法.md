@@ -856,3 +856,74 @@
   ```
 
   
+
+
+
+### 2. 计算属性和methods的区别
+
+计算属性有缓存，多次使用计算属性时，计算属性中的运算只会执行一次。
+
+
+
+### 3. 计算属性的setter和getter
+
+```vue
+<body>
+
+    <div id="app"></div>
+
+    <template id="my-app">
+        <h2>{{fullName}}</h2>
+        <button @click="changeFullName">修改</button>
+    </template>
+
+    <script src="../../js/vue.js"></script>
+
+    <script>
+
+        const App = {
+            template: '#my-app',
+            data() {
+                return {
+                    firstName: "Kobe",
+                    lastName: "Brant",
+                    score: 80,
+                    message: "hello word"
+                }
+            },
+            computed: {
+                // fullName 的 getter 方法
+                // fullName() {
+                //     return this.firstName + ' ' + this.lastName;
+                // }
+
+                // 完整写法:
+                fullName: {
+                    get: function () {
+                        return this.firstName + ' ' + this.lastName;
+                    },
+                    set: function (newValue) {
+                        console.log(newValue);
+                        const names = newValue.split(' ');
+                        this.firstName = names[0];
+                        this.lastName = names[1];
+                    }
+                }
+            },
+            methods: {
+                changeFullName() {
+                    this.fullName = 'lpz hhh';
+                }
+            }
+
+        }
+
+        Vue.createApp(App).mount('#app');
+
+    </script>
+
+</body>
+```
+
+
+
